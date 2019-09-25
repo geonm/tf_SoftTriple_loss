@@ -3,7 +3,7 @@ import sys
 import numpy as np
 import tensorflow as tf
 
-def softtriple(gt, embeddings, dim_features, num_class, num_centers=2, p_tau=0.2, p_lambda=0.1, p_delta=0.01, with_reg=True):
+def softtriple(gt, embeddings, dim_features, num_class, num_centers=2, p_lambda=20.0, p_tau=0.2, p_gamma=0.1, p_delta=0.01, with_reg=True):
     large_centers = tf.get_variable(name='feature_extractor/large_centers', shape=[num_class * num_centers, dim_features],
                                     dtype=tf.float32,
                                     initializer=tf.contrib.layers.xavier_initializer(uniform=True),
@@ -17,7 +17,7 @@ def softtriple(gt, embeddings, dim_features, num_class, num_centers=2, p_tau=0.2
 
     rs_large_logits = tf.reshape(large_logits, [batch_size, num_centers, num_class])
 
-    exp_rs_large_logits = tf.exp((1.0 / p_tau) * rs_large_logits)
+    exp_rs_large_logits = tf.exp((1.0 / p_gamma) * rs_large_logits)
 
     sum_rs_large_logits = tf.reduce_sum(exp_rs_large_logits, axis=1, keepdims=True)
 
