@@ -77,6 +77,6 @@ def softtriple(gt, embeddings, dim_features, num_class, num_centers=2, p_lambda=
     #reg_centers = tf.reduce_mean(tf.reduce_sum(tf.square(large_centers), 1))
     #loss_l2_reg = tf.multiply(0.25 * 0.002, reg_embeddings + reg_centers, name='loss_l2_reg')
 
-    total_loss = loss_xentropy
+    total_loss = loss_xentropy + loss_reg
 
     return total_loss  
