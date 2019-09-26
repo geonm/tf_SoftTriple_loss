@@ -66,11 +66,11 @@ def softtriple(gt, embeddings, dim_features, num_class, num_centers=2, p_lambda=
 
         dist_large_centers = p_tau * tf.multiply(dist_large_centers, mask)
 
-        reg_norm = tf.reduce_sum(dist_large_centers) / 2.0
+        reg_numer = tf.reduce_sum(dist_large_centers) / 2.0
 
-        reg_denorm = num_class * num_centers * (num_centers - 1.0)
+        reg_denumer = num_class * num_centers * (num_centers - 1.0)
 
-        loss_reg = reg_norm / reg_denorm
+        loss_reg = reg_numer / reg_denumer
 
     # l2 reg loss
     #reg_embeddings = tf.reduce_mean(tf.reduce_sum(tf.square(embeddings), 1))
